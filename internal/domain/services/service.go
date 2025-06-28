@@ -2,7 +2,7 @@ package services
 
 import "time"
 
-type service struct {
+type Service struct {
 	status    string
 	lastCheck time.Time
 }
