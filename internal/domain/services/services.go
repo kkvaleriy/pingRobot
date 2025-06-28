@@ -6,8 +6,8 @@ import (
 )
 
 var (
-	once sync.Once
-	s    *services
+	once sync.Once = sync.Once{}
+	s    *services = &services{}
 )
 
 type services struct {
