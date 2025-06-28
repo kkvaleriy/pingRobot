@@ -6,6 +6,6 @@ import (
 
 type services struct {
 	store map[string]service
-	wg    *sync.Mutex
-	once  *sync.Once
+	mu    *sync.Mutex
+}
 }
