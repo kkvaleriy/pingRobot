@@ -32,4 +32,16 @@ func Set(serviceName, status string, timeOfCheck time.Time) {
 }
 
 func Status() map[string]Service {
+	r := make(map[string]Service)
+	s.mu.Lock()
+	defer s.mu.Unlock()
+
+	for name, serv := range s.store {
+		r[name] = Service{
+			status:    serv.status,
+			lastCheck: serv.lastCheck,
+		}
+	}
+
+	return r
 }
