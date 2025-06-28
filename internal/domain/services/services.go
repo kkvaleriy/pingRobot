@@ -4,6 +4,10 @@ import (
 	"sync"
 	"time"
 )
+
+var (
+	once sync.Once
+	s    *services
 )
 
 type services struct {
