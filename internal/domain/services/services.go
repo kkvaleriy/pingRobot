@@ -30,3 +30,7 @@ func Set(serviceName, status string, timeOfCheck time.Time) {
 	defer s.mu.Unlock()
 	s.store[serviceName] = serv
 }
+
+func Status() map[string]service {
+	return s.store
+}
