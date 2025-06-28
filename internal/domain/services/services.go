@@ -11,18 +11,18 @@ var (
 )
 
 type services struct {
-	store map[string]service
+	store map[string]Service
 	mu    *sync.Mutex
 }
 
 func Set(serviceName, status string, timeOfCheck time.Time) {
 	once.Do(
 		func() {
-			s.store = make(map[string]service)
+			s.store = make(map[string]Service)
 			s.mu = &sync.Mutex{}
 		})
 
-	serv := service{
+	serv := Service{
 		status:    status,
 		lastCheck: timeOfCheck,
 	}
@@ -31,6 +31,5 @@ func Set(serviceName, status string, timeOfCheck time.Time) {
 	s.store[serviceName] = serv
 }
 
-func Status() map[string]service {
-	return s.store
+func Status() map[string]Service {
 }
