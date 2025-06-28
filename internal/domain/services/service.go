@@ -11,3 +11,6 @@ func (s *Service) Status() string {
 	return s.status
 }
 
+func (s *Service) TimeOfLastCheck() time.Time {
+	return s.lastCheck
+}
