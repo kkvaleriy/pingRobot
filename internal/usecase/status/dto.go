@@ -1,6 +1,10 @@
 package status
 
-import "time"
+import (
+	"time"
+
+	"github.com/kkvaleriy/pingRobot/internal/domain/services"
+)
 
 type StatusDto struct {
 	name      string
