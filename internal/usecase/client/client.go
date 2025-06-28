@@ -2,6 +2,6 @@ package client
 
 import "github.com/kkvaleriy/pingRobot/internal/domain/services"
 
-func Set(serviceInfo ClientDto) {
-	services.Set(serviceInfo.name, serviceInfo.status, serviceInfo.timeOfCheck)
+func Set(serviceInfo Dto) {
+	services.Set(serviceInfo.Name, serviceInfo.Status, serviceInfo.TimeOfCheck)
 }
