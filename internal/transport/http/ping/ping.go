@@ -23,11 +23,11 @@ func Do(serviceEndpoint, serviceName string) {
 func getWithRetry(serviceEndpoint string) string {
 	for range MaxRetries {
 		resp, err := http.Get(serviceEndpoint)
-		defer resp.Body.Close()
 		if err != nil {
 			<-time.After(RetriesInterval)
 			continue
 		}
+		defer resp.Body.Close()
 
 		return resp.Status
 	}
