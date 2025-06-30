@@ -7,9 +7,9 @@ import (
 )
 
 type Dto struct {
-	name      string
-	status    string
-	lastCheck time.Time
+	Name      string
+	Status    string
+	LastCheck time.Time
 }
 
 func createDto(s map[string]services.Service) []Dto {
@@ -17,9 +17,9 @@ func createDto(s map[string]services.Service) []Dto {
 
 	for name, service := range s {
 		statuses = append(statuses, Dto{
-			name:      name,
-			status:    service.Status(),
-			lastCheck: service.TimeOfLastCheck(),
+			Name:      name,
+			Status:    service.Status(),
+			LastCheck: service.TimeOfLastCheck(),
 		})
 	}
 
