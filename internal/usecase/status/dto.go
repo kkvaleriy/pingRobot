@@ -6,17 +6,17 @@ import (
 	"github.com/kkvaleriy/pingRobot/internal/domain/services"
 )
 
-type StatusDto struct {
+type Dto struct {
 	name      string
 	status    string
 	lastCheck time.Time
 }
 
-func createDto(s map[string]services.Service) []StatusDto {
-	statuses := []StatusDto{}
+func createDto(s map[string]services.Service) []Dto {
+	statuses := []Dto{}
 
 	for name, service := range s {
-		statuses = append(statuses, StatusDto{
+		statuses = append(statuses, Dto{
 			name:      name,
 			status:    service.Status(),
 			lastCheck: service.TimeOfLastCheck(),
