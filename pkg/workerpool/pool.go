@@ -27,6 +27,26 @@ func New(f func(serviceEndpoint, serviceName string), maxWorkers int) (*pool, ch
 	}, jc
 }
 
+func (w *pool)Run(ctx context.Context) {
+	defer w.wg.Wait()
+
+	for {
+		select {
+		case <- ctx.Done():
+			return
+		default:
+		}
+
+		currentWorkers := w.workersCount.Load()
+		if int(currentWorkers) >= w.maxWorkers {
+			<-time.After(time.Second)
+			continue
+		}
+		
+		go w.startJob()
+		
+	}
+}
 
 func (w *pool) startJob() {
 	w.wg.Add(1)
