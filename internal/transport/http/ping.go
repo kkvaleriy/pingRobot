@@ -21,7 +21,7 @@ func Do(serviceEndpoint, serviceName string) {
 }
 
 func getWithRetry(serviceEndpoint string) string {
-	for attempt := 0; attempt < MaxRetries; attempt++ {
+	for range MaxRetries {
 		resp, err := http.Get(serviceEndpoint)
 		defer resp.Body.Close()
 		if err != nil {
