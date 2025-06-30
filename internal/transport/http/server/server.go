@@ -9,3 +9,8 @@ import (
 
 	"github.com/kkvaleriy/pingRobot/internal/usecase/status"
 )
+
+var (
+	once sync.Once = sync.Once{}
+	srv  *http.Server
+)
