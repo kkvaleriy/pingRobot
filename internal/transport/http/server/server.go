@@ -30,6 +30,22 @@ func initServer() {
 	}
 }
 
+func Run(ctx context.Context) {
+	once.Do(
+		func() {
+			go initServer()
+
+			<-ctx.Done()
+
+			c, _ := context.WithTimeout(context.Background(), time.Minute)
+			err := srv.Shutdown(c)
+			if err != nil {
+				log.Printf("server failed to shutdown: %s", err.Error())
+				return
+			}
+			log.Print("server shutdown successfuly")
+		})
+}
 
 func handleMetrics(w http.ResponseWriter, r *http.Request) {
 	switch r.Method {
