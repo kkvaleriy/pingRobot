@@ -14,3 +14,16 @@ type pool struct {
 	maxWorkers   int
 	wg           *sync.WaitGroup
 }
+
+func New(f func(serviceEndpoint, serviceName string), maxWorkers int) (*pool, chan Job) {
+
+	jc := make(chan Job)
+
+	return &pool{
+		worker: worker{f: f},
+		jobs: jc,
+		maxWorkers: maxWorkers,
+		wg: &sync.WaitGroup{},
+	}, jc
+}
+
