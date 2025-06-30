@@ -27,3 +27,14 @@ func New(f func(serviceEndpoint, serviceName string), maxWorkers int) (*pool, ch
 	}, jc
 }
 
+
+func (w *pool) startJob() {
+	w.wg.Add(1)
+	w.workersCount.Add(1)
+	
+	j := <- w.jobs
+	w.worker.f(j.ServiceEndpoint, j.ServiceName)
+
+	w.wg.Done()
+	w.workersCount.Add(-1)
+}
