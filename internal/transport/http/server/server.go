@@ -15,6 +15,22 @@ var (
 	srv  *http.Server
 )
 
+func initServer() {
+	mux := http.NewServeMux()
+	mux.HandleFunc("/api/v1/metrics", handleMetrics)
+
+	srv = &http.Server{
+		Addr:    ":80",
+		Handler: mux,
+	}
+
+	err := srv.ListenAndServe()
+	if err != http.ErrServerClosed {
+		log.Fatalf("server failed to start: %s", err.Error())
+	}
+}
+
+
 func handleMetrics(w http.ResponseWriter, r *http.Request) {
 	switch r.Method {
 	case http.MethodGet:
