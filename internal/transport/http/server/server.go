@@ -31,7 +31,7 @@ func initServer() {
 }
 
 func Run(ctx context.Context) {
-	once.Do(
+	go once.Do(
 		func() {
 			go initServer()
 
