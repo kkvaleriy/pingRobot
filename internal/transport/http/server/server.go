@@ -10,17 +10,21 @@ import (
 	"github.com/kkvaleriy/pingRobot/internal/usecase/status"
 )
 
+type config interface {
+	Port() string
+}
+
 var (
 	once sync.Once = sync.Once{}
 	srv  *http.Server
 )
 
-func initServer() {
+func initServer(cfg config) {
 	mux := http.NewServeMux()
 	mux.HandleFunc("/api/v1/metrics", handleMetrics)
 
 	srv = &http.Server{
-		Addr:    ":80",
+		Addr:    ":" + cfg.Port(),
 		Handler: mux,
 	}
 
@@ -30,10 +34,10 @@ func initServer() {
 	}
 }
 
-func Run(ctx context.Context) {
+func Run(ctx context.Context, cfg config) {
 	go once.Do(
 		func() {
-			go initServer()
+			go initServer(cfg)
 
 			<-ctx.Done()
 
