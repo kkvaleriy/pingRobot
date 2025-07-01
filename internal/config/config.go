@@ -14,7 +14,7 @@ type service struct {
 }
 
 type server struct {
-	port string `yaml:"port"`
+	Port int `yaml:"port"`
 }
 
 type Config struct {
@@ -36,16 +36,16 @@ func FromFile() *Config {
 	return  cfg
 }
 
-// TODO: Check isDigit
 func (c *Config) Port() string{ 
 	defPort := "80"
-	if len(c.Server.port) < 2 {
+	
+	if c.Server.Port < 10 || c.Server.Port > 65535 {
+		log.Printf("invalid port value: %v, will use default port: %s", c.Server.Port, defPort)
 		return defPort
 	}
-	pDigit, err := strconv.Atoi(c.Server.port)
-	if err != nil || pDigit < 10 || pDigit > 65535 {
-		log.Printf("invalid port value: %s, will use default port: %s", c.Server.port, defPort)
-		return defPort
+	return strconv.Itoa(c.Server.Port)
 	}
-	return c.Server.port
+
+func (c *Config) ServicesForCheck() []service {
+	return c.Services
 }
