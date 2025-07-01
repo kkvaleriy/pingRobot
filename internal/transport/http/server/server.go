@@ -39,7 +39,7 @@ func Run(ctx context.Context) {
 
 			c, _ := context.WithTimeout(context.Background(), time.Minute)
 			err := srv.Shutdown(c)
-			if err != nil {
+			if err != nil { 
 				log.Printf("server failed to shutdown: %s", err.Error())
 				return
 			}
