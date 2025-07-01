@@ -1,0 +1,13 @@
+server:
+  port: 8080
+services:
+  - name: google
+    url: https://www.google.com/
+  - name: youtube
+    url: https://youtube.com/
+  - name: vk
+    url: https://vk.com/
+  - name: grok
+    url: https://grok.com/
+  - name: go dev
+    url: https://go.dev/
