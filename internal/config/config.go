@@ -9,8 +9,8 @@ import (
 )
 
 type service struct {
-	name string `yaml:"name"`
-	url  string `yaml:"url"`
+	Name string `yaml:"name"`
+	Url  string `yaml:"url"`
 }
 
 type server struct {
@@ -44,7 +44,7 @@ func (c *Config) Port() string{
 		return defPort
 	}
 	return strconv.Itoa(c.Server.Port)
-	}
+}
 
 func (c *Config) ServicesForCheck() []service {
 	return c.Services
