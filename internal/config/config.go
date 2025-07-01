@@ -3,6 +3,7 @@ package config
 import (
 	"log"
 	"os"
+	"strconv"
 
 	"gopkg.in/yaml.v3"
 )
@@ -33,4 +34,18 @@ func FromFile() *Config {
 	}
 
 	return  cfg
+}
+
+// TODO: Check isDigit
+func (c *Config) Port() string{ 
+	defPort := "80"
+	if len(c.Server.port) < 2 {
+		return defPort
+	}
+	pDigit, err := strconv.Atoi(c.Server.port)
+	if err != nil || pDigit < 10 || pDigit > 65535 {
+		log.Printf("invalid port value: %s, will use default port: %s", c.Server.port, defPort)
+		return defPort
+	}
+	return c.Server.port
 }
